@@ -1,5 +1,6 @@
 import os
 import supervisely_lib as sly
+import sys
 
 my_app = sly.AppService()
 
@@ -11,8 +12,10 @@ PROJECT_ID = int(os.environ['modal.state.slyProjectId'])
 @my_app.callback("do")
 @sly.timeit
 def do(**kwargs):
-    pass
-
+    example_file = os.path.join(os.path.dirname(sys.argv[0]), 'segm.json')
+    dtl = sly.json.load_json_file(example_file)
+    for layer in dtl:
+        pass
 
 def main():
     my_app.run(initial_events=[{"command": "do"}, {"command": "stop"}])
