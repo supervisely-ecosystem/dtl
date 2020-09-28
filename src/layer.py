@@ -32,65 +32,65 @@ class Layer:
 
     null = "null"
 
-    base_params = \
-    {
-        "definitions": {
-            "connections": {
-                "type": "array",
-                "items": {"type": "string"},
-                "minItems": 0
-            },
-            "color": {
-                "type": "array",
-                "items": {"type": "integer", "minimum": 0, "maximum": 255},
-                "maxItems": 3,
-                "minItems": 3,
-            },
-            "probability": {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 1
-            },
-            "percent": {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
-            },
-        },
-        "type": "object",
-        "required": ["action", "src", "dst"],
-        "properties": {
-            "action": {"type": "string"},
-            "src": {"$ref": "#/definitions/connections"},
-            "dst": {"type": "string"}
-        }
-    }
+    # base_params = \
+    # {
+    #     "definitions": {
+    #         "connections": {
+    #             "type": "array",
+    #             "items": {"type": "string"},
+    #             "minItems": 0
+    #         },
+    #         "color": {
+    #             "type": "array",
+    #             "items": {"type": "integer", "minimum": 0, "maximum": 255},
+    #             "maxItems": 3,
+    #             "minItems": 3,
+    #         },
+    #         "probability": {
+    #             "type": "number",
+    #             "minimum": 0,
+    #             "maximum": 1
+    #         },
+    #         "percent": {
+    #             "type": "number",
+    #             "minimum": 0,
+    #             "maximum": 100
+    #         },
+    #     },
+    #     "type": "object",
+    #     "required": ["action", "src", "dst"],
+    #     "properties": {
+    #         "action": {"type": "string"},
+    #         "src": {"$ref": "#/definitions/connections"},
+    #         "dst": {"type": "string"}
+    #     }
+    # }
 
-    layer_settings_schema = {
-        "type": "object",
-        "additionalProperties": False,
-        "properties": {
-            "required": {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "enum": ["settings"]
-                }
-            },
-            "properties": {
-                "type": "object",
-                "properties": {"settings": {}, "src": {}, "dst": {}},
-                "required": ["settings"],
-                "additionalProperties": False
-            }
-        }
-    }
+    # layer_settings_schema = {
+    #     "type": "object",
+    #     "additionalProperties": False,
+    #     "properties": {
+    #         "required": {
+    #             "type": "array",
+    #             "items": {
+    #                 "type": "string",
+    #                 "enum": ["settings"]
+    #             }
+    #         },
+    #         "properties": {
+    #             "type": "object",
+    #             "properties": {"settings": {}, "src": {}, "dst": {}},
+    #             "required": ["settings"],
+    #             "additionalProperties": False
+    #         }
+    #     }
+    # }
 
     actions_mapping = {}
 
     def __init__(self, config):
         self._config = deepcopy(config)
-        validate(config, self.params)
+        self.validate(config)
 
         self.srcs = maybe_wrap_in_list(config['src'])
         self.dsts = maybe_wrap_in_list(config['dst'])
@@ -102,6 +102,9 @@ class Layer:
         self.cls_mapping = {}
         self.define_classes_mapping()
         self.output_meta = None
+
+    def validate(self, config):
+        pass
 
     @property
     def config(self):
