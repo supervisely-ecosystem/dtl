@@ -4,24 +4,15 @@ import os
 import json
 import supervisely_lib as sly
 
-from Layer import Layer
-import layers  # to register layers
+#from Layer import Layer
+#import layers  # to register layers
+
+from layer import Layer
 
 
 class Net:
-    def __init__(self, graph_desc, input_project_metas, output_folder):
-        self.input_project_metas = input_project_metas
+    def __init__(self, graph):
         self.layers = []
-
-        if type(graph_desc) is str:
-            graph_path = graph_desc
-
-            if not os.path.exists(graph_path):
-                raise RuntimeError('No such config file "%s"' % graph_path)
-            else:
-                graph = json.load(open(graph_path, 'r'))
-        else:
-            graph = graph_desc
 
         graph_has_datal = False
         graph_has_savel = False
@@ -35,17 +26,19 @@ class Net:
             layer_cls = Layer.actions_mapping[action]
             if layer_cls.type == 'data':
                 graph_has_datal = True
-                layer = layer_cls(layer_config, input_project_metas)
+                #TODO:
+                #layer = layer_cls(layer_config, input_project_metas)
             elif layer_cls.type == 'processing':
                 layer = layer_cls(layer_config)
             elif layer_cls.type == 'save':
-                if graph_has_savel:
-                    raise ValueError(
-                        'Graph has to contain only one save layer. You added at least 2 layers: {!r} and {!r}.'
-                        .format(self.save_layer.config, layer_config))
-                graph_has_savel = True
-                layer = layer_cls(layer_config, output_folder, self)
-                self.save_layer = layer
+                #raise RuntimeError("Remove save layer?")
+                #if graph_has_savel:
+                #    raise ValueError(
+                #        'Graph has to contain only one save layer. You added at least 2 layers: {!r} and {!r}.'
+                #        .format(self.save_layer.config, layer_config))
+                #graph_has_savel = True
+                #self.save_layer = layer
+                layer = layer_cls(layer_config, self)
             else:
                 raise NotImplementedError()
             self.layers.append(layer)

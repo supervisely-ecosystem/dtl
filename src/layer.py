@@ -7,14 +7,14 @@ from copy import deepcopy
 
 from jsonschema import validate
 
-from legacy_supervisely_lib.project import tags_lib
-from legacy_supervisely_lib.project.project_meta import ProjectMeta
-from legacy_supervisely_lib.utils import json_utils
-from legacy_supervisely_lib.utils import os_utils
-from legacy_supervisely_lib.utils.stat_timer import TinyTimer, global_timer
-from legacy_supervisely_lib import logger
-
-from classes_utils import ClassConstants
+# from legacy_supervisely_lib.project import tags_lib
+# from legacy_supervisely_lib.project.project_meta import ProjectMeta
+# from legacy_supervisely_lib.utils import json_utils
+# from legacy_supervisely_lib.utils import os_utils
+# from legacy_supervisely_lib.utils.stat_timer import TinyTimer, global_timer
+# from legacy_supervisely_lib import logger
+#
+# from classes_utils import ClassConstants
 
 
 def maybe_wrap_in_list(v):
