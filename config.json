@@ -12,7 +12,7 @@
   "gui_template": "src/gui.html",
   "task_location": "workspace_tasks",
   "isolate": true,
-  "icon": "https://img.icons8.com/fluent/96/000000/change.png",
+  "icon": "https://github.com/supervisely-ecosystem/dtl/assets/48245050/e013760f-d5a4-4b59-963b-e3dd7126fd77",
   "icon_background": "#FFFFFF",
   "icon_cover": true,
   "context_menu": {
